@@ -6,6 +6,8 @@ let currentTrade = {};
 let currentSelectSide, tokens, contract, userAddress;
 const referrer = "0x680f520a98177c18a305aAA8523b26228bc05d31"; //set referrer address to receive fee
 
+const login = document.getElementById("login_button");
+login.addEventListener("click", connectWeb3);
 connectWeb3(); //connect wallet
 
 async function connectWeb3() {
