@@ -1,0 +1,23 @@
+{
+  "name": "swap",
+  "version": "1.0.0",
+  "description": "",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Jaytru1997/swap.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Jaytru1997/swap/issues"
+  },
+  "homepage": "https://github.com/Jaytru1997/swap#readme",
+  "dependencies": {
+    "web3": "^1.6.1"
+  }
+}

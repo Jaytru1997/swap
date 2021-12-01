@@ -1,4 +1,4 @@
-var isConnected = false;
+// var isConnected = false;
 const Address = "0xC586BeF4a0992C495Cf22e1aeEE4E446CECDee0E"; //1inch contract address
 const abi = [{ "inputs": [{ "internalType": "contract IOneSplitMulti", "name": "impl", "type": "address" }], "payable": false, "stateMutability": "nonpayable", "type": "constructor" }, { "anonymous": false, "inputs": [{ "indexed": true, "internalType": "address", "name": "newImpl", "type": "address" }], "name": "ImplementationUpdated", "type": "event" }, { "anonymous": false, "inputs": [{ "indexed": true, "internalType": "address", "name": "previousOwner", "type": "address" }, { "indexed": true, "internalType": "address", "name": "newOwner", "type": "address" }], "name": "OwnershipTransferred", "type": "event" }, { "anonymous": false, "inputs": [{ "indexed": true, "internalType": "contract IERC20", "name": "fromToken", "type": "address" }, { "indexed": true, "internalType": "contract IERC20", "name": "destToken", "type": "address" }, { "indexed": false, "internalType": "uint256", "name": "fromTokenAmount", "type": "uint256" }, { "indexed": false, "internalType": "uint256", "name": "destTokenAmount", "type": "uint256" }, { "indexed": false, "internalType": "uint256", "name": "minReturn", "type": "uint256" }, { "indexed": false, "internalType": "uint256[]", "name": "distribution", "type": "uint256[]" }, { "indexed": false, "internalType": "uint256[]", "name": "flags", "type": "uint256[]" }, { "indexed": false, "internalType": "address", "name": "referral", "type": "address" }, { "indexed": false, "internalType": "uint256", "name": "feePercent", "type": "uint256" }], "name": "Swapped", "type": "event" }, { "payable": true, "stateMutability": "payable", "type": "fallback" }, { "constant": true, "inputs": [], "name": "chi", "outputs": [{ "internalType": "contract IFreeFromUpTo", "name": "", "type": "address" }], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": false, "inputs": [{ "internalType": "contract IERC20", "name": "asset", "type": "address" }, { "internalType": "uint256", "name": "amount", "type": "uint256" }], "name": "claimAsset", "outputs": [], "payable": false, "stateMutability": "nonpayable", "type": "function" }, { "constant": true, "inputs": [{ "internalType": "contract IERC20", "name": "fromToken", "type": "address" }, { "internalType": "contract IERC20", "name": "destToken", "type": "address" }, { "internalType": "uint256", "name": "amount", "type": "uint256" }, { "internalType": "uint256", "name": "parts", "type": "uint256" }, { "internalType": "uint256", "name": "flags", "type": "uint256" }], "name": "getExpectedReturn", "outputs": [{ "internalType": "uint256", "name": "returnAmount", "type": "uint256" }, { "internalType": "uint256[]", "name": "distribution", "type": "uint256[]" }], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": true, "inputs": [{ "internalType": "contract IERC20", "name": "fromToken", "type": "address" }, { "internalType": "contract IERC20", "name": "destToken", "type": "address" }, { "internalType": "uint256", "name": "amount", "type": "uint256" }, { "internalType": "uint256", "name": "parts", "type": "uint256" }, { "internalType": "uint256", "name": "flags", "type": "uint256" }, { "internalType": "uint256", "name": "destTokenEthPriceTimesGasPrice", "type": "uint256" }], "name": "getExpectedReturnWithGas", "outputs": [{ "internalType": "uint256", "name": "returnAmount", "type": "uint256" }, { "internalType": "uint256", "name": "estimateGasAmount", "type": "uint256" }, { "internalType": "uint256[]", "name": "distribution", "type": "uint256[]" }], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": true, "inputs": [{ "internalType": "contract IERC20[]", "name": "tokens", "type": "address[]" }, { "internalType": "uint256", "name": "amount", "type": "uint256" }, { "internalType": "uint256[]", "name": "parts", "type": "uint256[]" }, { "internalType": "uint256[]", "name": "flags", "type": "uint256[]" }, { "internalType": "uint256[]", "name": "destTokenEthPriceTimesGasPrices", "type": "uint256[]" }], "name": "getExpectedReturnWithGasMulti", "outputs": [{ "internalType": "uint256[]", "name": "returnAmounts", "type": "uint256[]" }, { "internalType": "uint256", "name": "estimateGasAmount", "type": "uint256" }, { "internalType": "uint256[]", "name": "distribution", "type": "uint256[]" }], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": true, "inputs": [], "name": "isOwner", "outputs": [{ "internalType": "bool", "name": "", "type": "bool" }], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": true, "inputs": [], "name": "oneSplitImpl", "outputs": [{ "internalType": "contract IOneSplitMulti", "name": "", "type": "address" }], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": true, "inputs": [], "name": "owner", "outputs": [{ "internalType": "address", "name": "", "type": "address" }], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": false, "inputs": [], "name": "renounceOwnership", "outputs": [], "payable": false, "stateMutability": "nonpayable", "type": "function" }, { "constant": false, "inputs": [{ "internalType": "contract IOneSplitMulti", "name": "impl", "type": "address" }], "name": "setNewImpl", "outputs": [], "payable": false, "stateMutability": "nonpayable", "type": "function" }, { "constant": false, "inputs": [{ "internalType": "contract IERC20", "name": "fromToken", "type": "address" }, { "internalType": "contract IERC20", "name": "destToken", "type": "address" }, { "internalType": "uint256", "name": "amount", "type": "uint256" }, { "internalType": "uint256", "name": "minReturn", "type": "uint256" }, { "internalType": "uint256[]", "name": "distribution", "type": "uint256[]" }, { "internalType": "uint256", "name": "flags", "type": "uint256" }], "name": "swap", "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }], "payable": true, "stateMutability": "payable", "type": "function" }, { "constant": false, "inputs": [{ "internalType": "contract IERC20[]", "name": "tokens", "type": "address[]" }, { "internalType": "uint256", "name": "amount", "type": "uint256" }, { "internalType": "uint256", "name": "minReturn", "type": "uint256" }, { "internalType": "uint256[]", "name": "distribution", "type": "uint256[]" }, { "internalType": "uint256[]", "name": "flags", "type": "uint256[]" }], "name": "swapMulti", "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }], "payable": true, "stateMutability": "payable", "type": "function" }, { "constant": false, "inputs": [{ "internalType": "contract IERC20", "name": "fromToken", "type": "address" }, { "internalType": "contract IERC20", "name": "destToken", "type": "address" }, { "internalType": "uint256", "name": "amount", "type": "uint256" }, { "internalType": "uint256", "name": "minReturn", "type": "uint256" }, { "internalType": "uint256[]", "name": "distribution", "type": "uint256[]" }, { "internalType": "uint256", "name": "flags", "type": "uint256" }, { "internalType": "address", "name": "referral", "type": "address" }, { "internalType": "uint256", "name": "feePercent", "type": "uint256" }], "name": "swapWithReferral", "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }], "payable": true, "stateMutability": "payable", "type": "function" }, { "constant": false, "inputs": [{ "internalType": "contract IERC20[]", "name": "tokens", "type": "address[]" }, { "internalType": "uint256", "name": "amount", "type": "uint256" }, { "internalType": "uint256", "name": "minReturn", "type": "uint256" }, { "internalType": "uint256[]", "name": "distribution", "type": "uint256[]" }, { "internalType": "uint256[]", "name": "flags", "type": "uint256[]" }, { "internalType": "address", "name": "referral", "type": "address" }, { "internalType": "uint256", "name": "feePercent", "type": "uint256" }], "name": "swapWithReferralMulti", "outputs": [{ "internalType": "uint256", "name": "returnAmount", "type": "uint256" }], "payable": true, "stateMutability": "payable", "type": "function" }, { "constant": false, "inputs": [{ "internalType": "address", "name": "newOwner", "type": "address" }], "name": "transferOwnership", "outputs": [], "payable": false, "stateMutability": "nonpayable", "type": "function" }]; //TODO
 
@@ -9,46 +9,46 @@ const referrer = "0x680f520a98177c18a305aAA8523b26228bc05d31"; //set referrer ad
 // const login = document.getElementById("login_button");
 // login.addEventListener("click", connectWeb3);
 
-window.addEventListener('load', async () => {
-    // Modern dapp browsers...
-    if (window.ethereum) {
-        console.log("Web3 dectected");
-        window.web3 = new Web3(ethereum);
-        try {
-            // Request account access if needed
-            await ethereum.enable();
-            // Acccounts now exposed
-            isConnected = true;
-            contract = await new window.web3.eth.Contract(abi, Address);
-            self = await web3.eth.getAccounts();
-            self = self[0].toString();
-            userAddress = self;
-            web3.eth.handleRevert = true;
-            console.log("Your address: " + userAddress);
-            document.getElementById("swap_button").disabled = false;
-            // web3.eth.sendTransaction({/* ... */});
-        } catch (error) {
-            // User denied account access...
-        }
-    }
-    // Legacy dapp browsers...
-    else if (window.web3) {
-        console.log('Web3 Detected! ' + web3.currentProvider.constructor.name);
-        window.web3 = new Web3(web3.currentProvider);
-        isConnected = true;
-        document.getElementById("swap_button").disabled = false;
-        contract = new window.web3.eth.Contract(abi, Address);
-        // Acccounts always exposed
-        //web3.eth.sendTransaction({/* ... */});
-    }
-    // Non-dapp browsers...
-    else {
-        console.log('Non-Ethereum browser detected. You should consider trying MetaMask!');
-        console.log('No Web3 Detected... using HTTP Provider')
-        isConnected = false;
-        document.getElementById("swap_button").disabled = true;
-    }
-});
+// window.addEventListener('load', async () => {
+//     // Modern dapp browsers...
+//     if (window.ethereum) {
+//         console.log("Web3 dectected");
+//         window.web3 = new Web3(ethereum);
+//         try {
+//             // Request account access if needed
+//             await ethereum.enable();
+//             // Acccounts now exposed
+//             isConnected = true;
+//             contract = await new window.web3.eth.Contract(abi, Address);
+//             self = await web3.eth.getAccounts();
+//             self = self[0].toString();
+//             userAddress = self;
+//             web3.eth.handleRevert = true;
+//             console.log("Your address: " + userAddress);
+//             document.getElementById("swap_button").disabled = false;
+//             // web3.eth.sendTransaction({/* ... */});
+//         } catch (error) {
+//             // User denied account access...
+//         }
+//     }
+//     // Legacy dapp browsers...
+//     else if (window.web3) {
+//         console.log('Web3 Detected! ' + web3.currentProvider.constructor.name);
+//         window.web3 = new Web3(web3.currentProvider);
+//         isConnected = true;
+//         document.getElementById("swap_button").disabled = false;
+//         contract = new window.web3.eth.Contract(abi, Address);
+//         // Acccounts always exposed
+//         //web3.eth.sendTransaction({/* ... */});
+//     }
+//     // Non-dapp browsers...
+//     else {
+//         console.log('Non-Ethereum browser detected. You should consider trying MetaMask!');
+//         console.log('No Web3 Detected... using HTTP Provider')
+//         isConnected = false;
+//         document.getElementById("swap_button").disabled = true;
+//     }
+// });
 //connectWeb3(); //connect wallet
 
 // async function connectWeb3() {
@@ -79,9 +79,9 @@ window.addEventListener('load', async () => {
 //     }
 // }
 
-function isConnected(){
-    return isConnected;
-}
+// function isConnected(){
+//     return isConnected;
+// }
 
 fetch('https://api.1inch.exchange/v4.0/1/tokens').then(response => response.json()).then(data => {
     let tokens = data.tokens;
