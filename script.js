@@ -8,35 +8,76 @@ const referrer = "0x680f520a98177c18a305aAA8523b26228bc05d31"; //set referrer ad
 
 // const login = document.getElementById("login_button");
 // login.addEventListener("click", connectWeb3);
-connectWeb3(); //connect wallet
 
-async function connectWeb3() {
-    if(window.ethereum){
+window.addEventListener('load', async () => {
+    // Modern dapp browsers...
+    if (window.ethereum) {
         console.log("Web3 dectected");
-		window.web3 = new Web3(window.ethereum);
-		window.ethereum.enable();
-        isConnected = true;
-        contract = await new window.web3.eth.Contract(abi, Address);
-        self = await web3.eth.getAccounts();
-        self = self[0].toString();
-        userAddress = self;
-        web3.eth.handleRevert = true;
-        console.log("Your address: " + userAddress);
-        document.getElementById("swap_button").disabled = false;
-	}
-    else if(typeof web3 !== 'undefined') {
+        window.web3 = new Web3(ethereum);
+        try {
+            // Request account access if needed
+            await ethereum.enable();
+            // Acccounts now exposed
+            isConnected = true;
+            contract = await new window.web3.eth.Contract(abi, Address);
+            self = await web3.eth.getAccounts();
+            self = self[0].toString();
+            userAddress = self;
+            web3.eth.handleRevert = true;
+            console.log("Your address: " + userAddress);
+            document.getElementById("swap_button").disabled = false;
+            // web3.eth.sendTransaction({/* ... */});
+        } catch (error) {
+            // User denied account access...
+        }
+    }
+    // Legacy dapp browsers...
+    else if (window.web3) {
         console.log('Web3 Detected! ' + web3.currentProvider.constructor.name);
         window.web3 = new Web3(web3.currentProvider);
         isConnected = true;
         document.getElementById("swap_button").disabled = false;
         contract = new window.web3.eth.Contract(abi, Address);
+        // Acccounts always exposed
+        //web3.eth.sendTransaction({/* ... */});
     }
+    // Non-dapp browsers...
     else {
+        console.log('Non-Ethereum browser detected. You should consider trying MetaMask!');
         console.log('No Web3 Detected... using HTTP Provider')
         isConnected = false;
         document.getElementById("swap_button").disabled = true;
     }
-}
+});
+//connectWeb3(); //connect wallet
+
+// async function connectWeb3() {
+//     if(window.ethereum){
+//         console.log("Web3 dectected");
+// 		window.web3 = new Web3(window.ethereum);
+// 		window.ethereum.enable();
+//         isConnected = true;
+//         contract = await new window.web3.eth.Contract(abi, Address);
+//         self = await web3.eth.getAccounts();
+//         self = self[0].toString();
+//         userAddress = self;
+//         web3.eth.handleRevert = true;
+//         console.log("Your address: " + userAddress);
+//         document.getElementById("swap_button").disabled = false;
+// 	}
+//     else if(typeof web3 !== 'undefined') {
+//         console.log('Web3 Detected! ' + web3.currentProvider.constructor.name);
+//         window.web3 = new Web3(web3.currentProvider);
+//         isConnected = true;
+//         document.getElementById("swap_button").disabled = false;
+//         contract = new window.web3.eth.Contract(abi, Address);
+//     }
+//     else {
+//         console.log('No Web3 Detected... using HTTP Provider')
+//         isConnected = false;
+//         document.getElementById("swap_button").disabled = true;
+//     }
+// }
 
 function isConnected(){
     return isConnected;
